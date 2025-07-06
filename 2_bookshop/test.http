@@ -1,0 +1,21 @@
+
+###
+GET http://localhost:4004/odata/v4/bookshop?$metadata
+
+
+###
+# @name Booksquery
+GET http://localhost:4004/odata/v4/bookshop/Books
+
+###
+POST http://localhost:4004/odata/v4/bookshop/Books
+Content-Type: application/json
+
+{
+    "title": "New Book Title"
+}
+
+### @name DeleteOperation
+@book_id = {{ Booksquery.response.body.value[2].ID }}
+
+DELETE http://localhost:4004/odata/v4/bookshop/Books({{book_id}})
