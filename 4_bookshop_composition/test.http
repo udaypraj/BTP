@@ -1,0 +1,42 @@
+
+# @name booksQuery
+GET http://localhost:4004/odata/v4/bookshop/Books
+
+###
+@book_id = {{ booksQuery.response.body.value[2].ID }}
+DELETE http://localhost:4004/odata/v4/bookshop/Books({{book_id}})
+
+@base_url = http://localhost:4004/odata/v4
+
+######
+GET {{ base_url }}/bookshop/Orders?$expand=Items
+
+####
+POST {{ base_url }}/bookshop/Orders
+Content-Type: application/json
+
+{
+    "comments": "New Order",
+    "Items": [
+        {
+            "pos": "1",
+            "quant": 10
+        },
+        {
+            "pos": "2",
+            "quant": 100
+        }
+    ]
+}
+
+###
+
+PATCH {{base_url}}/bookshop/Orders(63290359-c4ce-4d28-ae3b-593e763c4a2b)
+Content-Type: application/json
+
+{
+"comments": "New Order 2"
+}
+
+####
+DELETE {{base_url}}/bookshop/Orders(63290359-c4ce-4d28-ae3b-593e763c4a2b)

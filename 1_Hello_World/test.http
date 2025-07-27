@@ -1,0 +1,6 @@
+get http://localhost:4004/odata/v4/say/hello
+Content-Type: application/json
+
+{
+    "to": "Uday"
+}
